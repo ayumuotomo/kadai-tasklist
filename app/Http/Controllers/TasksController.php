@@ -42,14 +42,15 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
+
         $task = new Task;
         $task->content = $request->content;
         $task->save();
-
-        return redirect('/'); //
-    }
-
+        
+}
     /**
      * Display the specified resource.
      *
@@ -88,13 +89,15 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {$task = Task::find($id);
+    { $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
+
+        $task = Task::find($id);
         $task->content = $request->content;
         $task->save();
 
-        return redirect('/');
-     
-    }
+        return redirect('/');    }
 
     /**
      * Remove the specified resource from storage.
